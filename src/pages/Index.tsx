@@ -342,40 +342,58 @@ export default function Index() {
         <div className="max-w-6xl mx-auto px-6 py-10">
           <div className="mb-6">
             <p className="font-mono text-[11px] tracking-[0.3em] text-[#f97316] uppercase mb-1">
-              3D-визуализация · ИИ-рендер
+              3D-визуализация · ИИ-рендер по вашим фото
             </p>
             <h2 className="font-display font-600 text-2xl md:text-3xl uppercase text-[#0f172a] leading-none">
-              Как будет выглядеть в помещении
+              Ваши стеллажи в помещении 2,4 × 4 м
             </h2>
           </div>
+
+          {/* Главный рендер — широкий */}
+          <div className="border-2 border-[#0f172a] overflow-hidden group mb-4">
+            <div className="relative overflow-hidden">
+              <img
+                src="https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/files/aee3d119-ffff-4598-a3fb-1860e6018b6a.jpg"
+                alt="Вид от входа — полная расстановка"
+                className="w-full aspect-[16/9] object-cover group-hover:scale-103 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/60 to-transparent" />
+              <span className="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.2em] uppercase bg-[#f97316] text-white px-3 py-1.5">
+                Вид от входа · полная расстановка
+              </span>
+            </div>
+          </div>
+
+          {/* Два рендера рядом */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border-2 border-[#0f172a] overflow-hidden group">
               <div className="relative overflow-hidden">
                 <img
-                  src="https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/files/c8686231-e16f-41a7-8682-0513d7ed191e.jpg"
-                  alt="Вид от входа"
+                  src="https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/files/d89fb59d-3859-42e6-9d76-990c6df19216.jpg"
+                  alt="Диагональный вид"
                   className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <span className="absolute bottom-3 left-3 font-mono text-[10px] tracking-[0.2em] uppercase bg-[#0f172a]/85 text-white px-2 py-1">
-                  Вид от входа
+                  Вид по диагонали · все зоны
                 </span>
               </div>
             </div>
             <div className="border-2 border-[#0f172a] overflow-hidden group">
               <div className="relative overflow-hidden">
                 <img
-                  src="https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/files/081d8a8e-234a-4bc5-bc5b-32c95102edb8.jpg"
-                  alt="Аксонометрия"
+                  src="https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/files/8a4a331e-f2ec-4eb8-9cc7-0d609f0a0d9e.jpg"
+                  alt="Аксонометрия сверху"
                   className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <span className="absolute bottom-3 left-3 font-mono text-[10px] tracking-[0.2em] uppercase bg-[#0f172a]/85 text-white px-2 py-1">
-                  Вид сверху · аксонометрия
+                  Аксонометрия · вид сверху
                 </span>
               </div>
             </div>
           </div>
+
           <p className="font-mono text-[10px] text-[#94a3b8] mt-3 tracking-wider">
-            * Рендер сгенерирован ИИ на основе схемы расстановки и фото мебели. Финальный вид зависит от выбранной отделки.
+            * Рендер сгенерирован ИИ по схеме расстановки и вашим фото деревянных стеллажей. Финальный вид зависит от выбранного финиша.
           </p>
         </div>
       </section>
