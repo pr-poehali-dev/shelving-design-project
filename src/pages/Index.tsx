@@ -18,6 +18,14 @@ type Item = {
   stroke: string;
   size: string;
   desc: string;
+  photo: string;
+};
+
+const PH = {
+  veg: 'https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/bucket/41af36cc-35c7-4431-a97d-393daabbd905.jpg',
+  dry: 'https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/bucket/52084d41-ace7-4e60-933a-4923b0e2f60a.jpg',
+  island: 'https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/bucket/482df9b7-36a6-4949-8cff-34ae8ae9164b.jpg',
+  cash: 'https://cdn.poehali.dev/projects/24824893-ae83-469f-ba4a-0c4313d600eb/bucket/cfc8d7b0-b6eb-4b9c-9de8-36969bcab668.jpeg',
 };
 
 const items: Item[] = [
@@ -34,6 +42,7 @@ const items: Item[] = [
     stroke: '#0f172a',
     size: '1000 × 600 мм, h 900 мм',
     desc: 'Расположен у входа справа от двери — продавец контролирует вход и торговый зал. Рабочее место с местом под весы и терминал.',
+    photo: PH.cash,
   },
   {
     id: 'veg',
@@ -48,6 +57,7 @@ const items: Item[] = [
     stroke: '#14532d',
     size: '2000 × 500 мм, h 1600 мм',
     desc: 'Наклонные лотки в 4 яруса под углом 15° для удобного обзора товара. Бортики 80 мм. Влагостойкое покрытие.',
+    photo: PH.veg,
   },
   {
     id: 'dry',
@@ -61,7 +71,8 @@ const items: Item[] = [
     fill: '#b45309',
     stroke: '#78350f',
     size: '2000 × 500 мм, h 1800 мм',
-    desc: 'Закрытые прозрачные бункеры-гравитейки в 3 ряда + полки для фасовки. Защита от пыли, мерные совки.',
+    desc: 'Секции-засыпки с мешковиной и мерными совками. Орехи и сухофрукты на развес, фасовка в крафт-пакеты.',
+    photo: PH.dry,
   },
   {
     id: 'island',
@@ -75,7 +86,8 @@ const items: Item[] = [
     fill: '#0369a1',
     stroke: '#075985',
     size: '1000 × 900 мм, h 1100 мм',
-    desc: 'Двусторонний остров с круговым доступом. Нижние корзины + верхняя выкладка акций. Покупатель обходит со всех сторон.',
+    desc: 'Двухъярусный остров с круговым доступом. Нижняя реечная полка + верхние секции-лотки. Покупатель обходит со всех сторон.',
+    photo: PH.island,
   },
 ];
 
@@ -235,7 +247,25 @@ export default function Index() {
         {/* SPEC + DETAILS */}
         <section className="space-y-6">
           {/* Active card */}
-          <div className="border-2 border-[#0f172a] bg-white p-6 shadow-[5px_5px_0_0_rgba(15,23,42,0.1)]">
+          <div className="border-2 border-[#0f172a] bg-white shadow-[5px_5px_0_0_rgba(15,23,42,0.1)] overflow-hidden">
+            <div className="relative h-52 sm:h-64 bg-[#0f172a] overflow-hidden">
+              <img
+                key={activeItem.photo}
+                src={activeItem.photo}
+                alt={activeItem.name}
+                className="w-full h-full object-cover animate-fade-in"
+              />
+              <span className="absolute top-3 left-3 font-mono text-[10px] tracking-[0.2em] uppercase bg-[#0f172a]/85 text-white px-2 py-1">
+                Реальное фото · фабрика
+              </span>
+              <span
+                className="absolute bottom-3 left-3 font-mono text-[10px] tracking-[0.2em] uppercase text-white px-2 py-1"
+                style={{ background: activeItem.fill }}
+              >
+                {activeItem.short}
+              </span>
+            </div>
+            <div className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div
                 className="w-11 h-11 flex items-center justify-center shrink-0"
@@ -254,6 +284,7 @@ export default function Index() {
               {activeItem.size}
             </div>
             <p className="text-[15px] text-[#334155] leading-relaxed">{activeItem.desc}</p>
+            </div>
           </div>
 
           {/* Spec table */}
@@ -305,6 +336,57 @@ export default function Index() {
           </div>
         </section>
       </main>
+
+      {/* GALLERY — дизайнерская визуализация */}
+      <section className="border-t-2 border-[#0f172a] bg-[#0f172a]">
+        <div className="max-w-6xl mx-auto px-6 py-10">
+          <div className="flex items-end justify-between gap-4 mb-6">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.3em] text-[#f97316] uppercase mb-1">
+                Визуализация проекта
+              </p>
+              <h2 className="font-display font-600 text-2xl md:text-3xl uppercase text-white leading-none">
+                Стеллажи в материале
+              </h2>
+            </div>
+            <span className="hidden md:block font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
+              4 элемента · массив сосны
+            </span>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {items.map((it, idx) => (
+              <button
+                key={it.id}
+                onClick={() => {
+                  setActive(it.id);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="group relative overflow-hidden border-2 border-white/10 hover:border-[#f97316] transition-colors text-left"
+              >
+                <div className="aspect-[3/4] overflow-hidden bg-black">
+                  <img
+                    src={it.photo}
+                    alt={it.name}
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                  />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 to-transparent pt-10">
+                  <p className="font-mono text-[9px] tracking-[0.2em] text-[#f97316] uppercase">
+                    Поз. {idx + 1}
+                  </p>
+                  <p className="font-display font-500 text-white text-sm uppercase leading-tight">
+                    {it.name}
+                  </p>
+                  <p className="font-mono text-[10px] text-white/60 mt-0.5">{it.size.split(',')[0]}</p>
+                </div>
+                <span className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center bg-[#f97316] opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Icon name="ArrowUpRight" size={15} className="text-white" />
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <footer className="border-t-2 border-[#0f172a] mt-6">
         <div className="max-w-6xl mx-auto px-6 py-4 font-mono text-[10px] tracking-[0.2em] text-[#64748b] uppercase flex flex-wrap justify-between gap-2">
